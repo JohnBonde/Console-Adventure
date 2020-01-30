@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ConsoleAdventure.Project.Interfaces;
 using ConsoleAdventure.Project.Models;
@@ -13,41 +14,48 @@ namespace ConsoleAdventure.Project
     {
       _game = new Game();
       Messages = new List<string>();
+      Messages.Add(_game.CurrentRoom.Description);
     }
     public void Go(string direction)
     {
-      throw new System.NotImplementedException();
+      if (_game.CurrentRoom.Exits.ContainsKey(direction))
+      {
+        Console.Clear();
+        _game.CurrentRoom = _game.CurrentRoom.Exits[direction];
+        System.Console.WriteLine(_game.CurrentRoom.Description);
+      }
     }
     public void Help()
     {
-      throw new System.NotImplementedException();
+      Console.WriteLine(@"You can type 'go (direction)', 'inventory', 'look', 'take (item name)', 'use (item name)', 'reset', or 'quit'.");
     }
 
     public void Inventory()
     {
-      throw new System.NotImplementedException();
+      Console.Write("Inventory: ");
+      foreach (Item item in _game.CurrentPlayer.Inventory)
+      {
+        Console.WriteLine(item.Name + " ");
+      }
     }
 
     public void Look()
     {
-      throw new System.NotImplementedException();
-    }
-
-    public void Quit()
-    {
-      throw new System.NotImplementedException();
-    }
-    ///<summary>
-    ///Restarts the game 
-    ///</summary>
-    public void Reset()
-    {
-      throw new System.NotImplementedException();
+      if (_game.CurrentRoom.Items.Count == 0)
+      {
+        System.Console.WriteLine("There appears to be nothing of use in the room.");
+      }
+      foreach (Item item in _game.CurrentRoom.Items)
+      {
+        Console.WriteLine("There is " + item.Description + " in the room.");
+      }
     }
     ///<summary>When taking an item be sure the item is in the current room before adding it to the player inventory, Also don't forget to remove the item from the room it was picked up in</summary>
     public void TakeItem(string itemName)
     {
-      throw new System.NotImplementedException();
+      _game.CurrentPlayer.Inventory.AddRange(_game.CurrentRoom.Items);
+      Console.WriteLine("You have taken the " + _game.CurrentRoom.Items[0].Name);
+      _game.CurrentRoom.Items.Clear();
     }
     ///<summary>
     ///No need to Pass a room since Items can only be used in the CurrentRoom
@@ -56,7 +64,11 @@ namespace ConsoleAdventure.Project
     ///</summary>
     public void UseItem(string itemName)
     {
-      throw new System.NotImplementedException();
+      if (itemName == _game.CurrentRoom.Enemies[0].Weakness)
+      {
+        _game.CurrentRoom.Enemies.Clear();
+        Console.WriteLine("You throw the eggs at the Veganator, causing him to go into the fetal position, like a vegan. A door appears on the the southern wall.");
+      }
     }
   }
 }

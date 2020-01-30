@@ -6,8 +6,6 @@ namespace ConsoleAdventure.Project.Interfaces
   public interface IGameService
   {
     List<string> Messages { get; }
-    void Reset();
-
     #region Console Commands
     //Should display a list of commands to the console
     void Help();
