@@ -50,7 +50,7 @@ namespace ConsoleAdventure.Project.Controllers
 ................................................................................................................................................................
 ................................................................................................................................................................
 ................................................................................................................................................................");
-      System.Console.WriteLine($"Welcome to your worst nightmare Ron Swanson.");
+      System.Console.WriteLine($"Welcome to your worst nightmare, Ron Swanson.");
       while (_running)
       {
         Print();
@@ -87,8 +87,8 @@ namespace ConsoleAdventure.Project.Controllers
           _running = false;
           break;
         case "reset":
-          Run();
           _gameService.ClearInventory();
+          Run();
           break;
         case "take":
           _gameService.TakeItem(option);

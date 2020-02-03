@@ -27,7 +27,7 @@ namespace ConsoleAdventure.Project
     }
     public void ClearInventory()
     {
-      _game.CurrentPlayer.Inventory.Clear();
+      _game.Setup();
     }
     public void Help()
     {
