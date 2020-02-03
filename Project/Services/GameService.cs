@@ -25,6 +25,10 @@ namespace ConsoleAdventure.Project
         System.Console.WriteLine(_game.CurrentRoom.Description);
       }
     }
+    public void ClearInventory()
+    {
+      _game.CurrentPlayer.Inventory.Clear();
+    }
     public void Help()
     {
       Console.WriteLine(@"You can type 'go (direction)', 'inventory', 'look', 'take (item name)', 'use (item name)', 'reset', or 'quit'.");
@@ -64,10 +68,28 @@ namespace ConsoleAdventure.Project
     ///</summary>
     public void UseItem(string itemName)
     {
-      if (itemName == _game.CurrentRoom.Enemies[0].Weakness)
+      if (itemName == _game.CurrentRoom.Enemies[0].Weakness && itemName == "eggs")
       {
         _game.CurrentRoom.Enemies.Clear();
         Console.WriteLine("You throw the eggs at the Veganator, causing him to go into the fetal position, like a vegan. A door appears on the the southern wall.");
+      }
+      else if (itemName == _game.CurrentRoom.Enemies[0].Weakness && itemName == "flashlight")
+      {
+        Console.WriteLine("You turn on you flashlight, and in the corner you a brunette. She yells, 'High Ron!' You are immediatly captivated by her and Leslie is nowhere to be seen to snap you out of it.");
+        Console.WriteLine(@"
+      ___           ___           ___           ___                    ___                        ___           ___     
+     /  /\         /  /\         /__/\         /  /\                  /  /\          ___         /  /\         /  /\    
+    /  /:/_       /  /::\       |  |::\       /  /:/_                /  /::\        /__/\       /  /:/_       /  /::\   
+   /  /:/ /\     /  /:/\:\      |  |:|:\     /  /:/ /\              /  /:/\:\       \  \:\     /  /:/ /\     /  /:/\:\  
+  /  /:/_/::\   /  /:/~/::\   __|__|:|\:\   /  /:/ /:/_            /  /:/  \:\       \  \:\   /  /:/ /:/_   /  /:/~/:/  
+ /__/:/__\/\:\ /__/:/ /:/\:\ /__/::::| \:\ /__/:/ /:/ /\          /__/:/ \__\:\  ___  \__\:\ /__/:/ /:/ /\ /__/:/ /:/___
+ \  \:\ /~~/:/ \  \:\/:/__\/ \  \:\~~\__\/ \  \:\/:/ /:/          \  \:\ /  /:/ /__/\ |  |:| \  \:\/:/ /:/ \  \:\/:::::/
+  \  \:\  /:/   \  \::/       \  \:\        \  \::/ /:/            \  \:\  /:/  \  \:\|  |:|  \  \::/ /:/   \  \::/~~~~ 
+   \  \:\/:/     \  \:\        \  \:\        \  \:\/:/              \  \:\/:/    \  \:\__|:|   \  \:\/:/     \  \:\     
+    \  \::/       \  \:\        \  \:\        \  \::/                \  \::/      \__\::::/     \  \::/       \  \:\    
+     \__\/         \__\/         \__\/         \__\/                  \__\/           ~~~~       \__\/         \__\/    
+");
+        Console.WriteLine("'quit' or 'reset'");
       }
     }
   }
